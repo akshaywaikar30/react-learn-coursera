@@ -7,12 +7,17 @@ class Menu extends Component {
         this.state = {
             selectedDish: null
         };
+        console.log("Menu component constructor called");
     }
 
     onDishSelect(dish){
         this.setState({
             selectedDish: dish
         });
+    }
+
+    componentDidMount(){
+        console.log("Menu component did mount");
     }
 
     renderDish(dish){
@@ -46,6 +51,8 @@ class Menu extends Component {
                 </div>
             );
         });
+
+        console.log("Menu component rendered");
 
         return (
             <div className="container">
