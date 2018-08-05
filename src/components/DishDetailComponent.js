@@ -1,18 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
-class Dishdetail extends Component {
-
-    componentDidMount(){
-        console.log("Dishdetail component did mount");
-    }
-
-    componentDidUpdate(){
-        console.log("Dishdetail component did update");
-    }
-
-    renderDish(dish){
-        console.log("Dishdetail component rendered");
+    function RenderDish({dish}){
         if(dish!=null){
             return (
                 <div className="col-12 col-md-5 m-1">
@@ -32,13 +21,13 @@ class Dishdetail extends Component {
         }
     }
 
-    renderComments(dish) {
-        if (dish != null) {
+    function RenderComments({comments}) {
+        if (comments != null) {
             return(
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <ul className="list-unstyled">
-                        {dish.comments.map((comment) => (
+                        {comments.map((comment) => (
                             <li key={comment.id}>
                                 <p>{comment.comment}</p>
                                 <p>-- {comment.author}, {
@@ -59,17 +48,25 @@ class Dishdetail extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    {this.renderDish(this.props.dish)}
-                    {this.renderComments(this.props.dish)}
+    const DishDetail = (props) => {
+        if(props.dish != null) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <RenderDish dish={props.dish}/>
+                        <RenderComments comments={props.dish.comments}/>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }else{
+            return(
+                <div className="container">
+                    <div className="row">
+                    </div>
+                </div>
+            );
+        }
     }
 
-}
 
-export default Dishdetail;
+export default DishDetail;
